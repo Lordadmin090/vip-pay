@@ -1,4 +1,4 @@
-import type { WalletRow } from '@/hooks/use-account-data';
+import type { WalletRow } from '@/lib/types/account';
 import { logWalletActivity } from '@/lib/wallet-activities';
 import { supabase } from '@/lib/supabase';
 

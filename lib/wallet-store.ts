@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 
-import type { WalletRow } from '@/hooks/use-account-data';
+import type { WalletRow } from '@/lib/types/account';
 
 type Listener = () => void;
 

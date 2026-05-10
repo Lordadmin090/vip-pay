@@ -1,6 +1,9 @@
 import type { Session } from '@supabase/supabase-js';
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
+import type { ProfileRow, WalletRow } from '@/lib/types/account';
+
+export type { ProfileRow, WalletRow };
 
 function isMissingTableError(err: unknown): boolean {
   const e = err as { code?: string; message?: string } | null;
@@ -10,28 +13,6 @@ function isMissingTableError(err: unknown): boolean {
   if (code === '42P01') return true;
   return msg.includes('does not exist') || msg.includes('undefined_table') || msg.includes('relation') || msg.includes('schema cache');
 }
-
-export type ProfileRow = {
-  id: string;
-  email: string | null;
-  first_name: string | null;
-  last_name: string | null;
-  full_name: string | null; // kept for compatibility
-  username: string | null;
-  phone: string | null;
-  country: string | null;
-  is_verified: boolean;
-};
-
-/** Mirrors `public.users` (and legacy `wallets`) balance columns. */
-export type WalletRow = {
-  user_id: string;
-  wallet_balance: number;
-  usd_ready: number;
-  coin_balance: number;
-  scroll_points: number;
-  gas_fee_balance: number;
-};
 
 function mapUsersRow(u: Record<string, unknown>, uid: string): WalletRow {
   return {
